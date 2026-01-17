@@ -62,6 +62,7 @@ $app->singleton(
 $app->configure('app');
 $app->configure('cache');
 $app->configure('database');
+$app->configure('services');
 
 /*
 |--------------------------------------------------------------------------
@@ -96,6 +97,7 @@ $app->configure('database');
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
+$app->register(Illuminate\Redis\RedisServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -110,8 +112,9 @@ $app->configure('database');
 
 $app->router->group([
     'namespace' => 'App\Http\Controllers',
+    'prefix' => 'api',
 ], function ($router) {
-    require __DIR__.'/../routes/web.php';
+    require __DIR__.'/../routes/api.php';
 });
 
 return $app;

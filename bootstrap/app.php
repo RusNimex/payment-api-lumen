@@ -48,6 +48,16 @@ $app->singleton(
     App\Console\Kernel::class
 );
 
+$app->bind(
+    App\Services\TokenServiceInterface::class,
+    App\Services\TokenService::class
+);
+
+$app->bind(
+    App\Contracts\HealthCheckServiceInterface::class,
+    App\Services\HealthCheckService::class
+);
+
 /*
 |--------------------------------------------------------------------------
 | Register Config Files
@@ -79,9 +89,9 @@ $app->configure('services');
 //     App\Http\Middleware\ExampleMiddleware::class
 // ]);
 
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+$app->routeMiddleware([
+    'token' => App\Http\Middleware\TokenAuth::class,
+]);
 
 /*
 |--------------------------------------------------------------------------

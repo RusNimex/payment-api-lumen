@@ -48,15 +48,6 @@ $app->singleton(
     App\Console\Kernel::class
 );
 
-$app->bind(
-    App\Services\TokenServiceInterface::class,
-    App\Services\TokenService::class
-);
-
-$app->bind(
-    App\Contracts\HealthCheckServiceInterface::class,
-    App\Services\HealthCheckService::class
-);
 
 /*
 |--------------------------------------------------------------------------
@@ -104,7 +95,7 @@ $app->routeMiddleware([
 |
 */
 
-// $app->register(App\Providers\AppServiceProvider::class);
+$app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 $app->register(Illuminate\Redis\RedisServiceProvider::class);

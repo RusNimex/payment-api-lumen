@@ -29,7 +29,19 @@ class HealthCheckService implements HealthCheckServiceInterface
     private function isRedisAvailable(): bool
     {
         try {
-            return (string) app('redis')->ping() === 'PONG';
+            $response = app('redis')->ping();
+
+            if (is_bool($response)) {
+                return $response;
+            }
+
+            if (is_int($response)) {
+                return $response === 1;
+            }
+
+            $pong = strtoupper(ltrim((string) $response, '+'));
+
+            return $pong === 'PONG';
         } catch (\Throwable $exception) {
             return false;
         }

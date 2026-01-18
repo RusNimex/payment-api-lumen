@@ -28,3 +28,6 @@ Homestead.json
 .env.production
 .phpactor.json
 auth.json
+.idea/modules.xml
+.idea/payment-api-lumen.iml
+.idea/workspace.xml

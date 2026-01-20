@@ -11,7 +11,7 @@ use Illuminate\Validation\ValidationException;
 /**
  * Валидация статуса платежа.
  */
-class PayStatusRequest
+class CheckRequest
 {
     /**
      * Всегда ожидаем название банка через который оплатчивается.

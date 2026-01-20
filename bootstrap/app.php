@@ -76,10 +76,6 @@ $app->configure('services');
 |
 */
 
-// $app->middleware([
-//     App\Http\Middleware\ExampleMiddleware::class
-// ]);
-
 $app->routeMiddleware([
     'token' => App\Http\Middleware\TokenAuth::class,
 ]);

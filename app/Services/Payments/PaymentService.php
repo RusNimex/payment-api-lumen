@@ -14,7 +14,7 @@ use App\Services\Payments\ValueObjects\PaymentStatusResult;
  * Банк-провайдеры создают фабрикой @see BankProviderFactory
  * Для расширения списка банков нужно в фабрике добавить новый класс.
  */
-class PayProviderService implements PaymentProviderInterface
+class PaymentService implements PaymentProviderInterface
 {
     /**
      * Создадим провайдера
@@ -28,9 +28,9 @@ class PayProviderService implements PaymentProviderInterface
     /**
      * {@inheritDoc}
      */
-    public function create(string $bankName, Order $order): PaymentResult
+    public function create(Order $order): PaymentResult
     {
-        $provider = $this->factory->create($bankName);
+        $provider = $this->factory->create($order->payProviderName);
         $payId = $provider->create($order);
 
         return $payId === null
@@ -41,9 +41,9 @@ class PayProviderService implements PaymentProviderInterface
     /**
      * {@inheritDoc}
      */
-    public function check(string $paymentUuid, string $bankName): PaymentStatusResult
+    public function check(string $paymentUuid, string $payProviderName): PaymentStatusResult
     {
-        $provider = $this->factory->create($bankName);
+        $provider = $this->factory->create($payProviderName);
 
         return PaymentStatusResult::fromBoolean($provider->check($paymentUuid));
     }

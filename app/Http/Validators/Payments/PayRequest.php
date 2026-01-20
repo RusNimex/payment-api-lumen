@@ -11,7 +11,7 @@ use Illuminate\Validation\ValidationException;
 /**
  * Валидация создания платежа
  */
-class PayCreateRequest
+class PayRequest
 {
     /**
      * Всегда ожидаем название банка через который оплата.
@@ -32,7 +32,11 @@ class PayCreateRequest
             'bank' => ['required', 'string', Rule::in($allowedBanks)],
             'productId' => ['required', 'string'],
             'amount' => ['required', 'numeric', 'min:0'],
+            'price' => ['required', 'numeric', 'min:0'],
+            'currency' => ['required', 'string', Rule::in(['RUB', 'USD', 'EUR'])],
             'email' => ['required', 'email'],
+            'phone' => ['sometime', 'string', 'min:10'],
+            'apiSecret' => ['sometime', 'string', 'min:10'],
         ]);
 
         if ($validator->fails()) {

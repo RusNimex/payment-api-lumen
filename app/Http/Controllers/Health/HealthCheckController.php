@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Health;
 
 use App\Contracts\HealthCheckServiceInterface;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -15,7 +16,7 @@ class HealthCheckController extends Controller
     ) {}
 
     /**
-     * Проверка, что процесс жив.
+     * Проверка, что сервис жив.
      */
     public function liveness(): JsonResponse
     {
